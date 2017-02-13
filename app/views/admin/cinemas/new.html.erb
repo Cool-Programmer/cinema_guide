@@ -1,0 +1,9 @@
+<%= form_for [:admin, @cinema] do |f| %>
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+
+	<%= f.label :is_active %>
+	<%= f.check_box :is_active %>
+
+	<%= f.submit 'Add Cinema' %>
+<% end %>
