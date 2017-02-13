@@ -1,4 +1,34 @@
-<h1>Admin#Cinemas#Index</h1>
-<% @cinemas.each do |cinema| %>
-	<h1><%= cinema.name %></h1>
+<h2 class="page-header">All cinemas <%= link_to 'Add New', new_admin_cinema_path, class: 'btn btn-primary pull-right' %></h2>
+
+<% if @cinemas.exists? %>
+	<% @cinemas.each_slice(3) do |cinema4| %>
+		<div class="row">
+			<% cinema4.each do |cinema| %>
+				<div class="col-md-3 well cinema">
+					<h4>
+						<%= cinema.name %> 
+						<span class="small">
+							<%= link_to edit_admin_cinema_path(cinema.id) do %>
+								<i class="fa fa-pencil pull-right"></i>
+							<% end %>
+						</span> 
+						<span class="small"> 
+							<%= link_to admin_cinema_path(cinema.id), method: :delete, data: {confirm: 'Are you sure?'} do %>
+								<i class="fa fa-trash pull-right"></i>
+							<% end %>
+						</span>
+					</h4>					
+					<p> <strong>Address: </strong> <em><%= cinema.location %></em></p>
+					<p> <strong>Telephone: </strong> <em><%= cinema.telephone %></em> </p>
+					<p> <strong>Working Hours: </strong> <em><%= cinema.open_hour %></em> - <em><%= cinema.close_hour %></em> </p>
+					<p><strong>Working Days: </strong> <em><%= cinema.open_day %></em> - <em><%= cinema.close_day %></em> </p>
+					<% if cinema.is_active == true %>
+						<span class="text-primary bg-success state">Open for guests <i class="fa fa-film"></i></span>
+					<% elsif cinema.is_active == false %>
+						<span class="text-danger bg-danger state">Temporarily closed <i class="fa fa-close"></i></span>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
 <% end %>

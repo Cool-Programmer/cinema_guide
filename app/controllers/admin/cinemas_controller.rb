@@ -1,4 +1,7 @@
 class Admin::CinemasController < Admin::ApplicationController
+
+	before_action :find_cinema, only: [:show, :edit, :update, :destroy]
+
 	def index
 		@cinemas = Cinema.all.order('created_at desc')
 	end
@@ -20,8 +23,30 @@ class Admin::CinemasController < Admin::ApplicationController
 		end
 	end
 
+	def edit
+		
+	end
+
+	def update
+		if @cinema.update(cinema_params)
+			redirect_to admin_cinemas_path
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+		if @cinema.destroy
+			redirect_to admin_cinemas_path
+		end
+	end
+
 	private
 	def cinema_params
-		params.require(:cinema).permit(:name, :is_active)
+		params.require(:cinema).permit(:name, :location, :telephone, :open_hour, :close_hour, :open_day, :close_day, :is_active)
+	end
+
+	def find_cinema
+		@cinema = Cinema.find(params[:id])
 	end
 end
