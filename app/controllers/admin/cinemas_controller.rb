@@ -3,7 +3,7 @@ class Admin::CinemasController < Admin::ApplicationController
 	before_action :find_cinema, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@cinemas = Cinema.all.order('created_at desc')
+		@cinemas = Cinema.all.order('created_at desc').paginate(:page => params[:page], :per_page => 9)
 	end
 
 	def show
@@ -43,7 +43,7 @@ class Admin::CinemasController < Admin::ApplicationController
 
 	private
 	def cinema_params
-		params.require(:cinema).permit(:name, :location, :telephone, :open_hour, :close_hour, :open_day, :close_day, :is_active)
+		params.require(:cinema).permit(:name, :featured, :location, :telephone, :open_hour, :close_hour, :open_day, :close_day, :is_active)
 	end
 
 	def find_cinema

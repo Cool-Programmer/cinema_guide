@@ -6,7 +6,12 @@
 			<% cinema4.each do |cinema| %>
 				<div class="col-md-3 well cinema">
 					<h4>
-						<%= cinema.name %> 
+						<%= cinema.name %>
+						<% if cinema.featured.exists? %>
+							<%= image_tag(cinema.featured.url) %>
+						<% else %>
+							<%= image_tag('no-foto.png') %>
+						<% end %>
 						<span class="small">
 							<%= link_to edit_admin_cinema_path(cinema.id) do %>
 								<i class="fa fa-pencil pull-right"></i>
@@ -31,4 +36,5 @@
 			<% end %>
 		</div>
 	<% end %>
+	<%= will_paginate @cinemas, renderer: BootstrapPagination::Rails %>
 <% end %>
