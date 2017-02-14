@@ -24,6 +24,42 @@
 				<p><strong>Working Days: </strong> <em><%= @cinema.open_day %></em> - <em><%= @cinema.close_day %></em> </p>
 			</div>
 		</div>
+		<hr>
+
+		<section id="reviews">
+			<h3>
+				<%= pluralize(@cinema.reviews.count, "reviews") %> 
+			</h3>
+
+			<div id="all_reviews">
+				<div class="clearfix">
+					<% @reviews.each do |review| %>
+						<div class="review">
+							<h6><%= review.message.humanize %></h6>
+							<p><small>Added <strong><%= time_ago_in_words(review.created_at) %> ago </strong>by <%= review.user.first_name %> </small></p>
+						</div>
+						<div class="btn-group pull-right">
+							<% if review.user == current_user %>
+							<%= link_to 'Edit', edit_cinema_review_path(review), class: 'btn btn-sm btn-default' %>
+							<%= link_to 'Delete', cinema_review_path(review), method: :delete, class: 'btn btn-sm btn-default', data: { confirm: 'Are you sure?' } %>
+							<% end %>
+						</div>
+					<% end %>
+				</div>
+			</div>
+
+			<div id="new_review">
+				<%= form_for [@cinema, Review.new] do |f| %>
+					<div class="field">
+						<%= f.text_area :message, class: 'form-control' %>
+					</div>
+					<br>
+					<%= f.submit 'Add Review', class: 'btn btn-primary' %>
+				<% end %>
+			</div>
+		</section>
+
+		
 	</div>
 
 	<div class="col-md-4">

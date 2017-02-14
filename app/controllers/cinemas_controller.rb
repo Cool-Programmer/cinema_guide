@@ -9,5 +9,6 @@ class CinemasController < ApplicationController
 
 	def show
 		@cinema = Cinema.find(params[:id])
+		@reviews = @cinema.reviews.all.order('created_at desc')
 	end
 end

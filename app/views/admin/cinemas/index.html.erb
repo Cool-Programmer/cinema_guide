@@ -19,6 +19,7 @@
             	<th data-field="is_active" data-sortable="true">Is Active</th>
             	<th data-field="opening-closing-time">Open/Close Hours</th>
             	<th data-field="opening-closing-days">Open/Close Days</th>
+                <th data-field="cinema-reviews-count">Reviews</th>
             	<th data-field="actions">Actions</th>
             </thead>
             <tbody>
@@ -37,6 +38,7 @@
 	            		</td>
 	            		<td><%= cinema.open_hour %> - <%= cinema.close_hour %></td>
 	            		<td><%= cinema.open_day %> - <%= cinema.close_day %></td>
+                        <td class="text-center"><%= cinema.reviews.count %></td>
 	            		<td>
 	            			<%= link_to edit_admin_cinema_path(cinema.id) do %>
 								<i class="fa fa-pencil pull-right"></i>

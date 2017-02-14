@@ -174,3 +174,19 @@ $darkGreen: #36424a;
 		line-height: 1px !important;
 	}
 }
+
+#reviews
+	{
+		margin-top: 2em;
+	}
+	#all_reviews
+	{
+		.review
+		{
+			padding: 1em 0;
+			border-top: 1px solid #E9E9E9;
+			h6{
+				text-transform: none !important;
+			}
+		}
+	}

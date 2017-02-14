@@ -2,6 +2,8 @@ class Cinema < ApplicationRecord
   has_attached_file :featured, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment_content_type :featured, content_type: /\Aimage\/.*\z/
 
+  has_many :reviews
+
   validates :name, presence: true,
   			length: {
   				minimum: 2,
