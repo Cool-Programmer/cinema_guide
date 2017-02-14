@@ -1,40 +1,100 @@
 <h2 class="page-header">All cinemas <%= link_to 'Add New', new_admin_cinema_path, class: 'btn btn-primary pull-right' %></h2>
 
-<% if @cinemas.exists? %>
-	<% @cinemas.each_slice(3) do |cinema4| %>
-		<div class="row">
-			<% cinema4.each do |cinema| %>
-				<div class="col-md-3 well cinema">
-					<h4>
-						<%= cinema.name %>
-						<% if cinema.featured.exists? %>
-							<%= image_tag(cinema.featured.url) %>
-						<% else %>
-							<%= image_tag('no-foto.png') %>
-						<% end %>
-						<span class="small">
-							<%= link_to edit_admin_cinema_path(cinema.id) do %>
+<div class="wrapper">
+    <div class="fresh-table full-color-orange full-screen-table">
+    <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange                  
+            Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+    -->
+        
+        <div class="toolbar">
+            <!-- <button id="alertBtn" class="btn btn-default">Alert</button> -->
+        </div>
+        
+        <table id="fresh-table" class="table">
+            <thead>
+                <th data-field="id">ID</th>
+            	<th data-field="name" data-sortable="true">Name</th>
+            	<th data-field="location" data-sortable="true">Location</th>
+            	<th data-field="telephone" data-sortable="true">Telephone</th>
+            	<th data-field="is_active" data-sortable="true">Is Active</th>
+            	<th data-field="opening-closing-time">Open/Close Hours</th>
+            	<th data-field="opening-closing-days">Open/Close Days</th>
+            	<th data-field="actions">Actions</th>
+            </thead>
+            <tbody>
+            	<% @cinemas.each do |cinema| %>
+					<tr>
+	            		<td><%= cinema.id %></td>
+	            		<td><%= cinema.name %></td>
+	            		<td><%= cinema.location %></td>
+	            		<td><%= cinema.telephone%></td>
+	            		<td>
+	            			<% if cinema.is_active == true %>
+		            			Working
+		            		<% else %>
+								Not Working
+		            		<% end %>
+	            		</td>
+	            		<td><%= cinema.open_hour %> - <%= cinema.close_hour %></td>
+	            		<td><%= cinema.open_day %> - <%= cinema.close_day %></td>
+	            		<td>
+	            			<%= link_to edit_admin_cinema_path(cinema.id) do %>
 								<i class="fa fa-pencil pull-right"></i>
 							<% end %>
-						</span> 
-						<span class="small"> 
 							<%= link_to admin_cinema_path(cinema.id), method: :delete, data: {confirm: 'Are you sure?'} do %>
 								<i class="fa fa-trash pull-right"></i>
 							<% end %>
-						</span>
-					</h4>					
-					<p> <strong>Address: </strong> <em><%= cinema.location %></em></p>
-					<p> <strong>Telephone: </strong> <em><%= cinema.telephone %></em> </p>
-					<p> <strong>Working Hours: </strong> <em><%= cinema.open_hour %></em> - <em><%= cinema.close_hour %></em> </p>
-					<p><strong>Working Days: </strong> <em><%= cinema.open_day %></em> - <em><%= cinema.close_day %></em> </p>
-					<% if cinema.is_active == true %>
-						<span class="text-primary bg-success state">Open for guests <i class="fa fa-film"></i></span>
-					<% elsif cinema.is_active == false %>
-						<span class="text-danger bg-danger state">Temporarily closed <i class="fa fa-close"></i></span>
-					<% end %>
-				</div>
-			<% end %>
-		</div>
-	<% end %>
-	<%= will_paginate @cinemas, renderer: BootstrapPagination::Rails %>
-<% end %>
+	            		</td>
+
+	            	</tr>
+            	<% end %>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+</body>
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'), 
+            full_screen = false,
+            window_height;
+            
+        $().ready(function(){
+            
+            window_height = $(window).height();
+            table_height = window_height + 70;
+            
+            
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: true,
+                search: true,
+                showToggle: true,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                sortable: true,
+                height: table_height,
+                pageSize: 25,
+                pageList: [25,50,100],
+                
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                    //do nothing here, we don't want to show the text "showing x of y from..." 
+                },
+                formatRecordsPerPage: function(pageNumber){
+                    return pageNumber + " rows visible";
+                },
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+        });
+    </script>

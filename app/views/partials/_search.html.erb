@@ -1,0 +1,8 @@
+<% if params[:controller] == 'cinemas' %>
+		<%= form_tag(cinemas_path, :method => "get", id: "search-form", class: 'search-form navbar-form navbar-right pull-right') do %>
+	    <div class="form-group">
+	        <%= text_field_tag :search, params[:search], placeholder: 'Search for cinemas... ', class: 'form-control' %>
+	    </div>
+	        <%= submit_tag "Search", :name => nil, class: 'btn btn-primary' %>
+	<% end %>
+<% end %> 

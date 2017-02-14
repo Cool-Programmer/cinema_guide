@@ -1,9 +1,9 @@
 class Admin::CinemasController < Admin::ApplicationController
 
-	before_action :find_cinema, only: [:show, :edit, :update, :destroy]
+	before_action :find_cinema, only: [:edit, :update, :destroy]
 
 	def index
-		@cinemas = Cinema.all.order('created_at desc').paginate(:page => params[:page], :per_page => 9)
+		@cinemas = Cinema.all.order('created_at desc')
 	end
 
 	def show

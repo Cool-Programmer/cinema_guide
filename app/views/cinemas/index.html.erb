@@ -1,1 +1,28 @@
-<h1>Front#Cinemas#Index</h1>
+<% if @cinemas.exists? %>
+	<% @cinemas.each_slice(3) do |cinema4| %>
+		<div class="row">
+			<% cinema4.each do |cinema| %>
+				<div class="col-md-3 well cinema">
+					<h4>
+						<%= link_to cinema.name, cinema %>
+						<% if cinema.featured.exists? %>
+							<%= link_to image_tag(cinema.featured.url), cinema_path(cinema) %>
+						<% else %>
+							<%= image_tag('no-foto.png') %>
+						<% end %>
+					</h4>					
+					<p> <strong>Address: </strong> <em><%= cinema.location %></em></p>
+					<p> <strong>Telephone: </strong> <em><%= cinema.telephone %></em> </p>
+					<p> <strong>Working Hours: </strong> <em><%= cinema.open_hour %></em> - <em><%= cinema.close_hour %></em> </p>
+					<p><strong>Working Days: </strong> <em><%= cinema.open_day %></em> - <em><%= cinema.close_day %></em> </p>
+					<% if cinema.is_active == true %>
+						<span class="text-primary bg-success state">Open for guests <i class="fa fa-film"></i></span>
+					<% elsif cinema.is_active == false %>
+						<span class="text-danger bg-danger state">Temporarily closed <i class="fa fa-close"></i></span>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+	<% end %>
+	<%= will_paginate @cinemas, renderer: BootstrapPagination::Rails %>
+<% end %>

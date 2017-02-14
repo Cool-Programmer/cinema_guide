@@ -43,5 +43,8 @@ class Cinema < ApplicationRecord
   				maximum: 10
   			}
 
-  
+
+  def self.search(query)
+    where("name like ? OR location like ? OR telephone like ?", "%#{query}%", "%#{query}%", "%#{query}%")
+  end
 end

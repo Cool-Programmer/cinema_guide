@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 	resources :cinemas
   end
 
-  get 'cinemas', to: 'cinemas#index'
+  resources :cinemas, only: [:index, :show]
   root 'cinemas#index' 
 end
