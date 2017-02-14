@@ -20,6 +20,7 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'paperclip', '~> 5.1'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem 'devise', '~> 4.2'
 
 group :development, :test do
   gem 'byebug', platform: :mri

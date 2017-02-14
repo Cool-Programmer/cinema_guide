@@ -25,21 +25,21 @@ $darkGreen: #36424a;
 	}
 }
 
-	.page-list{
-		display: block !important;
-	}
+.page-list{
+	display: block !important;
+}
 
-	.pagination{
-		display: block !important;
-	}
+.pagination{
+	display: block !important;
+}
 
-	.fixed-table-body{
-		overflow: all-scroll !important;
-	}
+.fixed-table-body{
+	overflow: all-scroll !important;
+}
 
-	#frash_table tbody{
-		overflow: all-scroll !important;	
-	}
+#frash_table tbody{
+	overflow: all-scroll !important;	
+}
 
 .fresh-table.full-color-orange {
     // background: radial-gradient(ellipse at center, #ff5221 0%, #511c39 100%) !important;
@@ -114,6 +114,7 @@ $darkGreen: #36424a;
 .navbar ul
 {
     margin-top: 22px;
+    margin-right: 20px;
 }
 
 .dropdown-menu > li > a
@@ -165,10 +166,11 @@ $darkGreen: #36424a;
 	}
 }
 
-.cinemaSingle
+.infoDiv
 {
-	// img{
-	// 	width: 20rem;
-	// 	height: 20rem;
-	// }
+	height: 7px !important;
+
+	p{
+		line-height: 1px !important;
+	}
 }

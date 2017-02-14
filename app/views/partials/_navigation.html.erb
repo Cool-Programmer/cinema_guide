@@ -13,9 +13,16 @@
       <li class="<%= params[:controller] == 'cinemas' && params[:action] == 'index' ? 'active' : '' %>"><%= link_to 'Home', root_path %></li>
       <li><%= link_to 'About Us', '#' %></li>
       <li><%= link_to 'Contact' %></li>
+      <li> <%= render 'partials/search' %></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <%= render 'partials/search' %>
+      <% if user_signed_in? %>
+        <li><%= link_to current_user.first_name, edit_user_registration_path %></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <li><%= link_to 'Sign In', new_user_session_path %></li>
+      <% end %>
     </ul>
   </div>
 </nav> <!-- Navbar ended -->

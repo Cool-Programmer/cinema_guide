@@ -1,0 +1,19 @@
+<div class="row">
+	<% if flash[:notice] %>
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-success infoDiv">
+			<p><%= flash[:notice] %></p>
+		</div>
+	</div>
+	<% end %>
+	
+	
+	<% if flash[:alert] %>
+	<div class="col-md-6 col-md-offset-3">
+		<div class="alert alert-danger infoDiv
+			">
+			<p><%= flash[:alert] %></p>
+		</div>
+	</div>
+	<% end %>
+</div>
