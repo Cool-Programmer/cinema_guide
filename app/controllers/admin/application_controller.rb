@@ -10,7 +10,6 @@ class Admin::ApplicationController < ActionController::Base
 	private 
 	def is_admin
 		if current_user.is_admin == true
-			flash[:notice] = "Logged in as admin"
 			current_user
 		elsif !current_user
 			flash[:notice] = "You need to be an admin to be here."

@@ -1,0 +1,95 @@
+<h2 class="page-header">All users <%= link_to 'Add New', new_admin_cinema_path, class: 'btn btn-primary pull-right' %></h2>
+
+<div class="wrapper">
+    <div class="fresh-table full-color-orange full-screen-table">
+    <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange                  
+            Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+    -->
+        
+        <div class="toolbar">
+            <!-- <button id="alertBtn" class="btn btn-default">Alert</button> -->
+        </div>
+        
+        <table id="fresh-table" class="table">
+            <thead>
+                <th data-field="id">ID</th>
+            	<th data-field="name" data-sortable="true">Name</th>
+            	<th data-field="email" data-sortable="true">Email</th>
+            	<th data-field="is_admin" data-sortable="true">Is Admin</th>
+            	<th data-field="signup-date">Signup date</th>
+            	<th data-field="actions">Actions</th>
+            </thead>
+            <tbody>
+            	<% @users.each do |user| %>
+					<tr>
+	            		<td><%= user.id %></td>
+	            		<td><%= user.first_name %></td>
+	            		<td><%= user.email %></td>
+	            		<td>
+	            			<% if user.is_admin == true %>
+		            			Admin
+		            		<% else %>
+								User
+		            		<% end %>
+	            		</td>
+	            		<td><%= time_ago_in_words user.created_at %> ago</td>
+	            		<td>
+	            			<%= link_to edit_admin_user_path(user.id) do %>
+								<i class="fa fa-pencil pull-right"></i>
+							<% end %>
+							<%= link_to admin_user_path(user.id), method: :delete, data: {confirm: 'Are you sure?'} do %>
+								<i class="fa fa-trash pull-right"></i>
+							<% end %>
+	            		</td>
+	            	</tr>
+            	<% end %>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+</body>
+    <script type="text/javascript">
+        var $table = $('#fresh-table'),
+            $alertBtn = $('#alertBtn'), 
+            full_screen = false,
+            window_height;
+            
+        $().ready(function(){
+            
+            window_height = $(window).height();
+            table_height = window_height + 70;
+            
+            
+            $table.bootstrapTable({
+                toolbar: ".toolbar",
+
+                showRefresh: true,
+                search: true,
+                showToggle: true,
+                showColumns: true,
+                pagination: true,
+                striped: true,
+                sortable: true,
+                height: table_height,
+                pageSize: 25,
+                pageList: [25,50,100],
+                
+                formatShowingRows: function(pageFrom, pageTo, totalRows){
+                    //do nothing here, we don't want to show the text "showing x of y from..." 
+                },
+                formatRecordsPerPage: function(pageNumber){
+                    return pageNumber + " rows visible";
+                },
+                icons: {
+                    refresh: 'fa fa-refresh',
+                    toggle: 'fa fa-th-list',
+                    columns: 'fa fa-columns',
+                    detailOpen: 'fa fa-plus-circle',
+                    detailClose: 'fa fa-minus-circle'
+                }
+            });
+        });
+    </script>

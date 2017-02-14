@@ -18,6 +18,13 @@
           <li class="<%= params[:controller] == 'admin/cinemas' && params[:action] == 'index' ? 'active' : '' %>"> <%= link_to 'View All', admin_cinemas_path %> </li>
         </ul>
       </li>
+      <li class="dropdown <%= params[:controller] == 'admin/users' ? 'active' : '' %>">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class="<%= params[:controller] == 'admin/users' && params[:action] == 'new' ? 'active' : '' %>"> <%= link_to 'Add New', new_admin_user_path %> </li>
+          <li class="<%= params[:controller] == 'admin/users' && params[:action] == 'index' ? 'active' : '' %>"> <%= link_to 'View All', admin_users_path %> </li>
+        </ul>
+      </li>
     </ul>
   </div>
 </nav> <!-- Navbar ended -->
