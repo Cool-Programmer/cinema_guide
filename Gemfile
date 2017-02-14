@@ -21,6 +21,7 @@ gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.1'
 gem 'paperclip', '~> 5.1'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 gem 'devise', '~> 4.2'
+gem 'mysql2', '~> 0.4.5'
 
 group :development, :test do
   gem 'byebug', platform: :mri

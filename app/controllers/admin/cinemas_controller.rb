@@ -17,6 +17,7 @@ class Admin::CinemasController < Admin::ApplicationController
 	def create
 		@cinema = Cinema.new(cinema_params)
 		if @cinema.save
+			flash[:notice] = 'Cinema added successfully!'
 			redirect_to admin_cinemas_path
 		else
 			render 'new'
@@ -29,6 +30,7 @@ class Admin::CinemasController < Admin::ApplicationController
 
 	def update
 		if @cinema.update(cinema_params)
+			flash[:notice] = 'Cinema\'s details updated successfully!'
 			redirect_to admin_cinemas_path
 		else
 			render 'edit'
@@ -37,6 +39,7 @@ class Admin::CinemasController < Admin::ApplicationController
 
 	def destroy
 		if @cinema.destroy
+			flash[:notice] = 'Cinema deleted successfully!'
 			redirect_to admin_cinemas_path
 		end
 	end
