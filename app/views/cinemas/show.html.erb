@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-md-8 cinemaSingle">
+		<div class="row">
+			<div class="col-md-7">
+				<h2>
+				<%= @cinema.name %>
+				</h2>
+				<% if @cinema.featured.exists? %>
+				<%= image_tag(@cinema.featured.url, class: 'img-responsive') %>
+				<% else %>
+				<%= image_tag('no-foto.png', class: 'img-responsive') %>
+				<% end %>
+			</div>
+			<div class="col-md-5" id="info">
+				<% if @cinema.is_active == true %>
+					<span class="text-primary bg-success state">Open for guests <i class="fa fa-film"></i></span>
+					<% elsif @cinema.is_active == false %>
+					<span class="text-danger bg-danger state">Temporarily closed <i class="fa fa-close"></i></span>
+				<% end %>
+				<br>
+				<p> <strong>Address: </strong> <em><%= @cinema.location %></em></p>
+				<p> <strong>Telephone: </strong> <em><%= @cinema.telephone %></em> </p>
+				<p> <strong>Working Hours: </strong> <em><%= @cinema.open_hour %></em> - <em><%= @cinema.close_hour %></em> </p>
+				<p><strong>Working Days: </strong> <em><%= @cinema.open_day %></em> - <em><%= @cinema.close_day %></em> </p>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Find <strong> <%= @cinema.name %> </strong> on the map</h3>
+			</div>
+			<div class="panel-body">
+				<iframe src="https://www.google.com/maps?q=<%= @cinema.location %>&output=embed" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</div>
+</div>

@@ -8,7 +8,7 @@
 						<% if cinema.featured.exists? %>
 							<%= link_to image_tag(cinema.featured.url), cinema_path(cinema) %>
 						<% else %>
-							<%= image_tag('no-foto.png') %>
+							<%= link_to image_tag('no-foto.png'), cinema_path(cinema) %>
 						<% end %>
 					</h4>					
 					<p> <strong>Address: </strong> <em><%= cinema.location %></em></p>

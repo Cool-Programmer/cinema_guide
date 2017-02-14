@@ -42,7 +42,8 @@ $darkGreen: #36424a;
 	}
 
 .fresh-table.full-color-orange {
-    background: radial-gradient(ellipse at center, #ff5221 0%, #511c39 100%) !important;
+    // background: radial-gradient(ellipse at center, #ff5221 0%, #511c39 100%) !important;
+    background: #772953 !important;
     background-size: 250% 250%;
 }
 .navbar
@@ -136,9 +137,15 @@ $darkGreen: #36424a;
 	}
 }
 
+#info
+{
+	margin-top: 67px !important;
+}
+
 .state
 {
-	padding: 5px !important;
+	padding: 4px !important;
+	margin-bottom: 5px;
 	min-height: 50px;
 }
 
@@ -156,4 +163,12 @@ $darkGreen: #36424a;
 		width: 100px;
 	    margin: 0 60px 0 16px;
 	}
+}
+
+.cinemaSingle
+{
+	// img{
+	// 	width: 20rem;
+	// 	height: 20rem;
+	// }
 }
