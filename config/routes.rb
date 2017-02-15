@@ -1,25 +1,16 @@
 Rails.application.routes.draw do
 
-  get 'reviews/show'
-
-  get 'reviews/new'
-
-  get 'reviews/create'
-
-  get 'reviews/edit'
-
-  get 'reviews/update'
-
-  get 'reviews/destroy'
-
   devise_for :users
+
   namespace :admin do
-	resources :cinemas
-	resources :users
+  	resources :cinemas do
+      resources :reviews, only: [:index, :destroy]
+    end
+  	resources :users
   end
 
   resources :cinemas, only: [:index, :show] do
-    resources :reviews
+    resources :reviews, only: [:create, :destroy]
   end
   root 'cinemas#index' 
 end

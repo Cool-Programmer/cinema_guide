@@ -1,9 +1,4 @@
 class ReviewsController < ApplicationController
-  def show
-  end
-
-  def new
-  end
 
   def create
     @cinema = Cinema.find(params[:cinema_id])
@@ -14,13 +9,13 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
+    @cinema = Cinema.find(params[:id])
+    @review = @cinema.reviews.find(params[:cinema_id])
+    if @review.destroy
+      flash[:notice] = "Your review was successfully deleted!"
+      redirect_to cinema_path(@cinema)
+    end
   end
 
   private

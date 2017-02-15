@@ -1,4 +1,4 @@
-<h2 class="page-header">All cinemas <%= link_to 'Add New', new_admin_cinema_path, class: 'btn btn-primary pull-right' %></h2>
+<h2 class="page-header">Reviews of <strong><%= @cinema.name %></strong> </h2>
 
 <div class="wrapper">
     <div class="fresh-table full-color-orange full-screen-table">
@@ -14,52 +14,28 @@
             <thead>
                 <th data-field="id">ID</th>
             	<th data-field="name" data-sortable="true">Name</th>
-            	<th data-field="location" data-sortable="true">Location</th>
-            	<th data-field="telephone" data-sortable="true">Telephone</th>
-            	<th data-field="is_active" data-sortable="true">Is Active</th>
-            	<th data-field="opening-closing-time">Open/Close Hours</th>
-            	<th data-field="opening-closing-days">Open/Close Days</th>
-                <th data-field="cinema-reviews-count">Reviews</th>
+                <th data-field="cinema-name">To Cinema</th>
+                <th data-field="message">Message</th>
             	<th data-field="actions">Actions</th>
             </thead>
             <tbody>
-            	<% @cinemas.each do |cinema| %>
+            	<% @reviews.each do |review| %>
 					<tr>
-	            		<td><%= cinema.id %></td>
-	            		<td><%= cinema.name %></td>
-	            		<td><%= cinema.location %></td>
-	            		<td><%= cinema.telephone%></td>
-	            		<td>
-	            			<% if cinema.is_active == true %>
-		            			Working
-		            		<% else %>
-								Not Working
-		            		<% end %>
-	            		</td>
-	            		<td><%= cinema.open_hour %> - <%= cinema.close_hour %></td>
-	            		<td><%= cinema.open_day %> - <%= cinema.close_day %></td>
-                        <td class="text-center">
-                            <% if cinema.reviews.count > 0 %>
-                                <%= link_to pluralize(cinema.reviews.count, "review"), admin_cinema_reviews_path(cinema) %> 
-                            <% else %>
-                                0
+	            		<td><%= review.id %></td>
+	            		<td><%= review.user.first_name %></td>
+	            		<td><%= review.cinema.name %></td>
+	            		<td><%= review.message %></td>
+                        <td>
+                        <!-- OMG, remember to pass @cinema -->
+                            <%= link_to admin_cinema_review_path(@cinema, review.id), method: :delete, data: {confirm: 'Are you sure?'} do %>
+                            <i class="fa fa-trash pull-right"></i>
                             <% end %>
                         </td>
-	            		<td>
-	            			<%= link_to edit_admin_cinema_path(cinema.id) do %>
-								<i class="fa fa-pencil pull-right"></i>
-							<% end %>
-							<%= link_to admin_cinema_path(cinema.id), method: :delete, data: {confirm: 'Are you sure?'} do %>
-								<i class="fa fa-trash pull-right"></i>
-							<% end %>
-	            		</td>
-
 	            	</tr>
             	<% end %>
             </tbody>
         </table>
     </div>
-    
 </div>
 
 

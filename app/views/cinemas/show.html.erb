@@ -28,7 +28,7 @@
 
 		<section id="reviews">
 			<h3>
-				<%= pluralize(@cinema.reviews.count, "reviews") %> 
+				<%= pluralize(@cinema.reviews.count, "review") %> 
 			</h3>
 
 			<div id="all_reviews">
@@ -36,17 +36,20 @@
 					<% @reviews.each do |review| %>
 						<div class="review">
 							<h6><%= review.message.humanize %></h6>
-							<p><small>Added <strong><%= time_ago_in_words(review.created_at) %> ago </strong>by <%= review.user.first_name %> </small></p>
-						</div>
-						<div class="btn-group pull-right">
-							<% if review.user == current_user %>
-							<%= link_to 'Edit', edit_cinema_review_path(review), class: 'btn btn-sm btn-default' %>
-							<%= link_to 'Delete', cinema_review_path(review), method: :delete, class: 'btn btn-sm btn-default', data: { confirm: 'Are you sure?' } %>
-							<% end %>
+							<p>
+								<small class="text-muted small">Added <%= time_ago_in_words(review.created_at) %> ago by <%= review.user.first_name %> </small>
+								<% if review.user == current_user || current_user.is_admin == true %>
+									<%= link_to cinema_review_path(review), method: :delete, data: { confirm: 'Are you sure?' } do %>
+										<i class="fa fa-trash pull-right"></i>
+									<% end %>
+								<% end %>
+							</p>
 						</div>
 					<% end %>
 				</div>
 			</div>
+
+			<hr>
 
 			<div id="new_review">
 				<%= form_for [@cinema, Review.new] do |f| %>
